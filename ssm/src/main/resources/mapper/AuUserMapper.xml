@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cccctld.dao.AuUserMapper" >
+  <resultMap id="BaseResultMap" type="com.cccctld.model.AuUser" >
+    <constructor >
+      <idArg column="ID" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="PARTY_ID" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="LOGIN_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PASSWORD" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PWD_QUESTION" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PWD_ANSWER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IS_ADMIN" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="AGENT_STATUS" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="EMAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOGIN_IP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ENABLE_STATUS" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="ENABLE_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="AUDIT_FLAG" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="AUDIT_USER" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="AUDIT_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="CREATE_USER" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="CREATE_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="MODIFY_USER" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="MODIFY_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="LOGIN_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="RETIRE_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="SYSTEM_CODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FAILED_TIMES" jdbcType="DECIMAL" javaType="java.lang.Short" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, PARTY_ID, LOGIN_ID, PASSWORD, PWD_QUESTION, PWD_ANSWER, NAME, IS_ADMIN, AGENT_STATUS, 
+    EMAIL, LOGIN_IP, ENABLE_STATUS, ENABLE_DATE, AUDIT_FLAG, AUDIT_USER, AUDIT_TIME, 
+    CREATE_USER, CREATE_DATE, MODIFY_USER, MODIFY_DATE, LOGIN_DATE, RETIRE_DATE, SYSTEM_CODE, 
+    FAILED_TIMES
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cccctld.model.AuUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from au_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from au_user
+    where ID = #{id,jdbcType=CHAR}
+  </select>
+  <!-- 登录查询 -->
+  <select id="login" parameterType="com.cccctld.model.AuUser" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from au_user
+		<where>
+			<if test="loginId!=null">
+				and login_id = #{loginId}
+			</if>
+			<if test="password!=null">
+				and password = #{password}
+			</if>
+		</where>
+	</select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from au_user
+    where ID = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cccctld.model.AuUserExample" >
+    delete from au_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cccctld.model.AuUser" >
+    insert into au_user (ID, PARTY_ID, LOGIN_ID, 
+      PASSWORD, PWD_QUESTION, PWD_ANSWER, 
+      NAME, IS_ADMIN, AGENT_STATUS, 
+      EMAIL, LOGIN_IP, ENABLE_STATUS, 
+      ENABLE_DATE, AUDIT_FLAG, AUDIT_USER, 
+      AUDIT_TIME, CREATE_USER, CREATE_DATE, 
+      MODIFY_USER, MODIFY_DATE, LOGIN_DATE, 
+      RETIRE_DATE, SYSTEM_CODE, FAILED_TIMES
+      )
+    values (#{id,jdbcType=CHAR}, #{partyId,jdbcType=CHAR}, #{loginId,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{pwdQuestion,jdbcType=VARCHAR}, #{pwdAnswer,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{isAdmin,jdbcType=CHAR}, #{agentStatus,jdbcType=CHAR}, 
+      #{email,jdbcType=VARCHAR}, #{loginIp,jdbcType=VARCHAR}, #{enableStatus,jdbcType=CHAR}, 
+      #{enableDate,jdbcType=TIMESTAMP}, #{auditFlag,jdbcType=CHAR}, #{auditUser,jdbcType=CHAR}, 
+      #{auditTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifyUser,jdbcType=CHAR}, #{modifyDate,jdbcType=TIMESTAMP}, #{loginDate,jdbcType=TIMESTAMP}, 
+      #{retireDate,jdbcType=TIMESTAMP}, #{systemCode,jdbcType=VARCHAR}, #{failedTimes,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cccctld.model.AuUser" >
+    insert into au_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="partyId != null" >
+        PARTY_ID,
+      </if>
+      <if test="loginId != null" >
+        LOGIN_ID,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="pwdQuestion != null" >
+        PWD_QUESTION,
+      </if>
+      <if test="pwdAnswer != null" >
+        PWD_ANSWER,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="isAdmin != null" >
+        IS_ADMIN,
+      </if>
+      <if test="agentStatus != null" >
+        AGENT_STATUS,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="loginIp != null" >
+        LOGIN_IP,
+      </if>
+      <if test="enableStatus != null" >
+        ENABLE_STATUS,
+      </if>
+      <if test="enableDate != null" >
+        ENABLE_DATE,
+      </if>
+      <if test="auditFlag != null" >
+        AUDIT_FLAG,
+      </if>
+      <if test="auditUser != null" >
+        AUDIT_USER,
+      </if>
+      <if test="auditTime != null" >
+        AUDIT_TIME,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="modifyUser != null" >
+        MODIFY_USER,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="loginDate != null" >
+        LOGIN_DATE,
+      </if>
+      <if test="retireDate != null" >
+        RETIRE_DATE,
+      </if>
+      <if test="systemCode != null" >
+        SYSTEM_CODE,
+      </if>
+      <if test="failedTimes != null" >
+        FAILED_TIMES,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="partyId != null" >
+        #{partyId,jdbcType=CHAR},
+      </if>
+      <if test="loginId != null" >
+        #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdQuestion != null" >
+        #{pwdQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdAnswer != null" >
+        #{pwdAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isAdmin != null" >
+        #{isAdmin,jdbcType=CHAR},
+      </if>
+      <if test="agentStatus != null" >
+        #{agentStatus,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null" >
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="enableStatus != null" >
+        #{enableStatus,jdbcType=CHAR},
+      </if>
+      <if test="enableDate != null" >
+        #{enableDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditFlag != null" >
+        #{auditFlag,jdbcType=CHAR},
+      </if>
+      <if test="auditUser != null" >
+        #{auditUser,jdbcType=CHAR},
+      </if>
+      <if test="auditTime != null" >
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        #{modifyUser,jdbcType=CHAR},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginDate != null" >
+        #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retireDate != null" >
+        #{retireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="systemCode != null" >
+        #{systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="failedTimes != null" >
+        #{failedTimes,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cccctld.model.AuUserExample" resultType="java.lang.Integer" >
+    select count(*) from au_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update au_user
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.partyId != null" >
+        PARTY_ID = #{record.partyId,jdbcType=CHAR},
+      </if>
+      <if test="record.loginId != null" >
+        LOGIN_ID = #{record.loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pwdQuestion != null" >
+        PWD_QUESTION = #{record.pwdQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pwdAnswer != null" >
+        PWD_ANSWER = #{record.pwdAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAdmin != null" >
+        IS_ADMIN = #{record.isAdmin,jdbcType=CHAR},
+      </if>
+      <if test="record.agentStatus != null" >
+        AGENT_STATUS = #{record.agentStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginIp != null" >
+        LOGIN_IP = #{record.loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enableStatus != null" >
+        ENABLE_STATUS = #{record.enableStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.enableDate != null" >
+        ENABLE_DATE = #{record.enableDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.auditFlag != null" >
+        AUDIT_FLAG = #{record.auditFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.auditUser != null" >
+        AUDIT_USER = #{record.auditUser,jdbcType=CHAR},
+      </if>
+      <if test="record.auditTime != null" >
+        AUDIT_TIME = #{record.auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=CHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null" >
+        MODIFY_USER = #{record.modifyUser,jdbcType=CHAR},
+      </if>
+      <if test="record.modifyDate != null" >
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loginDate != null" >
+        LOGIN_DATE = #{record.loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.retireDate != null" >
+        RETIRE_DATE = #{record.retireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.systemCode != null" >
+        SYSTEM_CODE = #{record.systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.failedTimes != null" >
+        FAILED_TIMES = #{record.failedTimes,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update au_user
+    set ID = #{record.id,jdbcType=CHAR},
+      PARTY_ID = #{record.partyId,jdbcType=CHAR},
+      LOGIN_ID = #{record.loginId,jdbcType=VARCHAR},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      PWD_QUESTION = #{record.pwdQuestion,jdbcType=VARCHAR},
+      PWD_ANSWER = #{record.pwdAnswer,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      IS_ADMIN = #{record.isAdmin,jdbcType=CHAR},
+      AGENT_STATUS = #{record.agentStatus,jdbcType=CHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      LOGIN_IP = #{record.loginIp,jdbcType=VARCHAR},
+      ENABLE_STATUS = #{record.enableStatus,jdbcType=CHAR},
+      ENABLE_DATE = #{record.enableDate,jdbcType=TIMESTAMP},
+      AUDIT_FLAG = #{record.auditFlag,jdbcType=CHAR},
+      AUDIT_USER = #{record.auditUser,jdbcType=CHAR},
+      AUDIT_TIME = #{record.auditTime,jdbcType=TIMESTAMP},
+      CREATE_USER = #{record.createUser,jdbcType=CHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=CHAR},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      LOGIN_DATE = #{record.loginDate,jdbcType=TIMESTAMP},
+      RETIRE_DATE = #{record.retireDate,jdbcType=TIMESTAMP},
+      SYSTEM_CODE = #{record.systemCode,jdbcType=VARCHAR},
+      FAILED_TIMES = #{record.failedTimes,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cccctld.model.AuUser" >
+    update au_user
+    <set >
+      <if test="partyId != null" >
+        PARTY_ID = #{partyId,jdbcType=CHAR},
+      </if>
+      <if test="loginId != null" >
+        LOGIN_ID = #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdQuestion != null" >
+        PWD_QUESTION = #{pwdQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdAnswer != null" >
+        PWD_ANSWER = #{pwdAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isAdmin != null" >
+        IS_ADMIN = #{isAdmin,jdbcType=CHAR},
+      </if>
+      <if test="agentStatus != null" >
+        AGENT_STATUS = #{agentStatus,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null" >
+        LOGIN_IP = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="enableStatus != null" >
+        ENABLE_STATUS = #{enableStatus,jdbcType=CHAR},
+      </if>
+      <if test="enableDate != null" >
+        ENABLE_DATE = #{enableDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditFlag != null" >
+        AUDIT_FLAG = #{auditFlag,jdbcType=CHAR},
+      </if>
+      <if test="auditUser != null" >
+        AUDIT_USER = #{auditUser,jdbcType=CHAR},
+      </if>
+      <if test="auditTime != null" >
+        AUDIT_TIME = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        MODIFY_USER = #{modifyUser,jdbcType=CHAR},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginDate != null" >
+        LOGIN_DATE = #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retireDate != null" >
+        RETIRE_DATE = #{retireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="systemCode != null" >
+        SYSTEM_CODE = #{systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="failedTimes != null" >
+        FAILED_TIMES = #{failedTimes,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cccctld.model.AuUser" >
+    update au_user
+    set PARTY_ID = #{partyId,jdbcType=CHAR},
+      LOGIN_ID = #{loginId,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      PWD_QUESTION = #{pwdQuestion,jdbcType=VARCHAR},
+      PWD_ANSWER = #{pwdAnswer,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      IS_ADMIN = #{isAdmin,jdbcType=CHAR},
+      AGENT_STATUS = #{agentStatus,jdbcType=CHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      LOGIN_IP = #{loginIp,jdbcType=VARCHAR},
+      ENABLE_STATUS = #{enableStatus,jdbcType=CHAR},
+      ENABLE_DATE = #{enableDate,jdbcType=TIMESTAMP},
+      AUDIT_FLAG = #{auditFlag,jdbcType=CHAR},
+      AUDIT_USER = #{auditUser,jdbcType=CHAR},
+      AUDIT_TIME = #{auditTime,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=CHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{modifyUser,jdbcType=CHAR},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      LOGIN_DATE = #{loginDate,jdbcType=TIMESTAMP},
+      RETIRE_DATE = #{retireDate,jdbcType=TIMESTAMP},
+      SYSTEM_CODE = #{systemCode,jdbcType=VARCHAR},
+      FAILED_TIMES = #{failedTimes,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

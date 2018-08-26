@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cccctld.dao.AuEmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.cccctld.model.AuEmployee" >
+    <constructor >
+      <idArg column="ID" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="PERSON_NO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PERSON_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ENGLISH_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PERSON_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SEX" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="MOBILE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TEL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EMAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ADDRESS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="POSTALCODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="REMARK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ENABLE_STATUS" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="ENABLE_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="CREATE_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="MODIFY_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="COLUMN1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COLUMN2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COLUMN3" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, PERSON_NO, PERSON_NAME, ENGLISH_NAME, PERSON_TYPE, SEX, MOBILE, TEL, EMAIL, ADDRESS, 
+    POSTALCODE, REMARK, ENABLE_STATUS, ENABLE_DATE, CREATE_DATE, MODIFY_DATE, COLUMN1, 
+    COLUMN2, COLUMN3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cccctld.model.AuEmployeeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from au_employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from au_employee
+    where ID = #{id,jdbcType=CHAR}
+  </select>
+  <select id="list" resultMap="BaseResultMap" parameterType="com.cccctld.model.AuEmployeeExample">
+		select
+		<include refid="Base_Column_List" />
+		from au_employee
+		<if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+	</select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from au_employee
+    where ID = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cccctld.model.AuEmployeeExample" >
+    delete from au_employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cccctld.model.AuEmployee" >
+    insert into au_employee (ID, PERSON_NO, PERSON_NAME, 
+      ENGLISH_NAME, PERSON_TYPE, SEX, 
+      MOBILE, TEL, EMAIL, 
+      ADDRESS, POSTALCODE, REMARK, 
+      ENABLE_STATUS, ENABLE_DATE, CREATE_DATE, 
+      MODIFY_DATE, COLUMN1, COLUMN2, 
+      COLUMN3)
+    values (#{id,jdbcType=CHAR}, #{personNo,jdbcType=VARCHAR}, #{personName,jdbcType=VARCHAR}, 
+      #{englishName,jdbcType=VARCHAR}, #{personType,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{postalcode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{enableStatus,jdbcType=CHAR}, #{enableDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifyDate,jdbcType=TIMESTAMP}, #{column1,jdbcType=VARCHAR}, #{column2,jdbcType=VARCHAR}, 
+      #{column3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cccctld.model.AuEmployee" >
+    insert into au_employee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="personNo != null" >
+        PERSON_NO,
+      </if>
+      <if test="personName != null" >
+        PERSON_NAME,
+      </if>
+      <if test="englishName != null" >
+        ENGLISH_NAME,
+      </if>
+      <if test="personType != null" >
+        PERSON_TYPE,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="tel != null" >
+        TEL,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="postalcode != null" >
+        POSTALCODE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="enableStatus != null" >
+        ENABLE_STATUS,
+      </if>
+      <if test="enableDate != null" >
+        ENABLE_DATE,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="column1 != null" >
+        COLUMN1,
+      </if>
+      <if test="column2 != null" >
+        COLUMN2,
+      </if>
+      <if test="column3 != null" >
+        COLUMN3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="personNo != null" >
+        #{personNo,jdbcType=VARCHAR},
+      </if>
+      <if test="personName != null" >
+        #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="englishName != null" >
+        #{englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="personType != null" >
+        #{personType,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null" >
+        #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="enableStatus != null" >
+        #{enableStatus,jdbcType=CHAR},
+      </if>
+      <if test="enableDate != null" >
+        #{enableDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="column1 != null" >
+        #{column1,jdbcType=VARCHAR},
+      </if>
+      <if test="column2 != null" >
+        #{column2,jdbcType=VARCHAR},
+      </if>
+      <if test="column3 != null" >
+        #{column3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cccctld.model.AuEmployeeExample" resultType="java.lang.Integer" >
+    select count(*) from au_employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update au_employee
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.personNo != null" >
+        PERSON_NO = #{record.personNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personName != null" >
+        PERSON_NAME = #{record.personName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.englishName != null" >
+        ENGLISH_NAME = #{record.englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personType != null" >
+        PERSON_TYPE = #{record.personType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        SEX = #{record.sex,jdbcType=CHAR},
+      </if>
+      <if test="record.mobile != null" >
+        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        TEL = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postalcode != null" >
+        POSTALCODE = #{record.postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enableStatus != null" >
+        ENABLE_STATUS = #{record.enableStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.enableDate != null" >
+        ENABLE_DATE = #{record.enableDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyDate != null" >
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.column1 != null" >
+        COLUMN1 = #{record.column1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column2 != null" >
+        COLUMN2 = #{record.column2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column3 != null" >
+        COLUMN3 = #{record.column3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update au_employee
+    set ID = #{record.id,jdbcType=CHAR},
+      PERSON_NO = #{record.personNo,jdbcType=VARCHAR},
+      PERSON_NAME = #{record.personName,jdbcType=VARCHAR},
+      ENGLISH_NAME = #{record.englishName,jdbcType=VARCHAR},
+      PERSON_TYPE = #{record.personType,jdbcType=VARCHAR},
+      SEX = #{record.sex,jdbcType=CHAR},
+      MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      TEL = #{record.tel,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      POSTALCODE = #{record.postalcode,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      ENABLE_STATUS = #{record.enableStatus,jdbcType=CHAR},
+      ENABLE_DATE = #{record.enableDate,jdbcType=TIMESTAMP},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      COLUMN1 = #{record.column1,jdbcType=VARCHAR},
+      COLUMN2 = #{record.column2,jdbcType=VARCHAR},
+      COLUMN3 = #{record.column3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cccctld.model.AuEmployee" >
+    update au_employee
+    <set >
+      <if test="personNo != null" >
+        PERSON_NO = #{personNo,jdbcType=VARCHAR},
+      </if>
+      <if test="personName != null" >
+        PERSON_NAME = #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="englishName != null" >
+        ENGLISH_NAME = #{englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="personType != null" >
+        PERSON_TYPE = #{personType,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        TEL = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null" >
+        POSTALCODE = #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="enableStatus != null" >
+        ENABLE_STATUS = #{enableStatus,jdbcType=CHAR},
+      </if>
+      <if test="enableDate != null" >
+        ENABLE_DATE = #{enableDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="column1 != null" >
+        COLUMN1 = #{column1,jdbcType=VARCHAR},
+      </if>
+      <if test="column2 != null" >
+        COLUMN2 = #{column2,jdbcType=VARCHAR},
+      </if>
+      <if test="column3 != null" >
+        COLUMN3 = #{column3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cccctld.model.AuEmployee" >
+    update au_employee
+    set PERSON_NO = #{personNo,jdbcType=VARCHAR},
+      PERSON_NAME = #{personName,jdbcType=VARCHAR},
+      ENGLISH_NAME = #{englishName,jdbcType=VARCHAR},
+      PERSON_TYPE = #{personType,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=CHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      POSTALCODE = #{postalcode,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ENABLE_STATUS = #{enableStatus,jdbcType=CHAR},
+      ENABLE_DATE = #{enableDate,jdbcType=TIMESTAMP},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      COLUMN1 = #{column1,jdbcType=VARCHAR},
+      COLUMN2 = #{column2,jdbcType=VARCHAR},
+      COLUMN3 = #{column3,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

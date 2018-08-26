@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<!-- 自动扫描的包名所有controller ，禁止掉默认扫描所有 use-default-filters -->
+	<context:component-scan base-package="com.cccctld,com.sys"
+		use-default-filters="false">
+		<!--只扫描Controller -->
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<!-- 视图解释类 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+<!-- 
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<map>
+				<entry key="ResourceNotFoundException" value="common/error/resourceNotFoundError" />
+				<entry key=".DataAccessException" value="common/error/dataAccessError" />
+			</map>
+		</property>
+		<property name="statusCodes" >
+			<map>
+				<entry key="common/error/resourceNotFoundError" value="404" />
+				<entry key="common/error/dataAccessError" value="500" />
+			</map>
+		</property>
+	</bean>
+	<mvc:resources mapping="/error/**" location="/WEB-INF/views/extra/" />
+	 -->
+	<!-- 将springmvc不能处理的请求交给tomcat -->
+	<mvc:default-servlet-handler />
+	<!-- 默认的注解映射的支持 (支持更高级的一些功能,例如：JSR303校验,快捷的AJAX请求,映射动态请求) -->
+	<mvc:annotation-driven />
+
+
+</beans>
