@@ -136,6 +136,11 @@
 		    <version>2.6</version>
 		</dependency>
 				
+		<dependency>
+		    <groupId>org.activiti</groupId>
+		    <artifactId>activiti-modeler</artifactId>
+		    <version>5.22.0</version>
+		</dependency>
 	</dependencies>
 	
 	<distributionManagement>
@@ -184,6 +189,7 @@
     </pluginRepositories> -->
 
 	<build>
+		<defaultGoal>compile</defaultGoal>
 		<finalName>ssm</finalName>
 		<!-- <resources> 表示把java目录下的有关xml文件,properties文件编译/打包的时候放在resource目录下 <resource> 
 			<directory>${basedir}/src/main/java</directory> <includes> <include>**/*.properties</include> 
@@ -213,6 +219,16 @@
                     <packagingExcludes>WEB-INF/web.xml</packagingExcludes>
                 </configuration>
             </plugin>
+            
+            <plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<!-- 门户服务端口号 -->
+					<port>8082</port>
+					<path>/</path>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
