@@ -13,7 +13,7 @@ http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<!-- 自动扫描的包名所有controller ，禁止掉默认扫描所有 use-default-filters -->
-	<context:component-scan base-package="com.cccctld,com.sys"
+	<context:component-scan base-package="com.honsung,com.sys"
 		use-default-filters="false">
 		<!--只扫描Controller -->
 		<context:include-filter type="annotation"

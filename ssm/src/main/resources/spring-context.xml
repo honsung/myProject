@@ -16,7 +16,7 @@
 
 
 	<!-- 自动扫描的包名 -->
-	<context:component-scan base-package="com.cccctld">
+	<context:component-scan base-package="com.honsung">
 		<!-- 不包括controller -->
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
@@ -49,9 +49,9 @@
 		<!-- 注入sqlSessionFactory -->
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 		<!-- 扫描所有dao接口的实现,加入到ioc容器中 -->
-		<property name="basePackage" value="com.cccctld.dao"></property>
+		<property name="basePackage" value="com.honsung.dao"></property>
         <!-- 如果要扫描多个包下的dao接口，可以通过加自定义注解的方式进行扫描-->
-       <!--  <property name="annotationClass" value="com.cccctld.common.persistence.annotation.MyBatisDao"/> -->
+       <!--  <property name="annotationClass" value="com.honsung.common.persistence.annotation.MyBatisDao"/> -->
 	</bean>
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
@@ -67,7 +67,7 @@
 	<!-- 开启基于注解的事物、使用xml配置形式的事物(一般使用配置xml形式比较多) -->
 	<aop:config>
 		<!-- 切入点表达式 -->
-		<aop:pointcut expression="execution(* com.cccctld.service..*(..))" id="txPoint" />
+		<aop:pointcut expression="execution(* com.honsung.service..*(..))" id="txPoint" />
 		<!-- 配置事物增强 -->
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint"/>
 	</aop:config>

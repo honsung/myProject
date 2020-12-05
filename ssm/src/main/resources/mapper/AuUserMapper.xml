@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cccctld.dao.AuUserMapper" >
-  <resultMap id="BaseResultMap" type="com.cccctld.model.AuUser" >
+<mapper namespace="com.honsung.dao.AuUserMapper" >
+  <resultMap id="BaseResultMap" type="com.honsung.model.AuUser" >
     <constructor >
       <idArg column="ID" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="PARTY_ID" jdbcType="CHAR" javaType="java.lang.String" />
@@ -93,7 +93,7 @@
     CREATE_USER, CREATE_DATE, MODIFY_USER, MODIFY_DATE, LOGIN_DATE, RETIRE_DATE, SYSTEM_CODE, 
     FAILED_TIMES
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cccctld.model.AuUserExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.honsung.model.AuUserExample" >
     select
     <if test="distinct" >
       distinct
@@ -114,7 +114,7 @@
     where ID = #{id,jdbcType=CHAR}
   </select>
   <!-- 登录查询 -->
-  <select id="login" parameterType="com.cccctld.model.AuUser" resultMap="BaseResultMap">
+  <select id="login" parameterType="com.honsung.model.AuUser" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from au_user
@@ -131,13 +131,13 @@
     delete from au_user
     where ID = #{id,jdbcType=CHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cccctld.model.AuUserExample" >
+  <delete id="deleteByExample" parameterType="com.honsung.model.AuUserExample" >
     delete from au_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cccctld.model.AuUser" >
+  <insert id="insert" parameterType="com.honsung.model.AuUser" >
     insert into au_user (ID, PARTY_ID, LOGIN_ID, 
       PASSWORD, PWD_QUESTION, PWD_ANSWER, 
       NAME, IS_ADMIN, AGENT_STATUS, 
@@ -157,7 +157,7 @@
       #{retireDate,jdbcType=TIMESTAMP}, #{systemCode,jdbcType=VARCHAR}, #{failedTimes,jdbcType=DECIMAL}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.cccctld.model.AuUser" >
+  <insert id="insertSelective" parameterType="com.honsung.model.AuUser" >
     insert into au_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -308,7 +308,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cccctld.model.AuUserExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.honsung.model.AuUserExample" resultType="java.lang.Integer" >
     select count(*) from au_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -424,7 +424,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cccctld.model.AuUser" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.honsung.model.AuUser" >
     update au_user
     <set >
       <if test="partyId != null" >
@@ -499,7 +499,7 @@
     </set>
     where ID = #{id,jdbcType=CHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cccctld.model.AuUser" >
+  <update id="updateByPrimaryKey" parameterType="com.honsung.model.AuUser" >
     update au_user
     set PARTY_ID = #{partyId,jdbcType=CHAR},
       LOGIN_ID = #{loginId,jdbcType=VARCHAR},
