@@ -273,7 +273,7 @@
 					<li class="dropdown user">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<img alt="" src="<%=request.getContextPath() %>/static/image/avatar1_small.jpg" />
-						<span class="username">赵六</span>
+						<span class="username">${currentLoginUser.name}</span>
 						<i class="icon-angle-down"></i>
 						</a>
 						<ul class="dropdown-menu">

@@ -40,7 +40,8 @@ public class LoginController {
 	@RequestMapping(value="/loginGap", method=RequestMethod.POST)
 	public String Login(AuUser user,HttpSession session){
 		AuUser returnUser = auUserService.login(user);
-		session.setAttribute("CurrentLoginUser", returnUser);
+		System.out.println(returnUser.getName());
+		session.setAttribute("currentLoginUser", returnUser);
 		String returnPath = "index";
 		if(returnUser == null){
 			returnPath = "login/login";
@@ -57,5 +58,4 @@ public class LoginController {
 			return "index";
 		}
 	}
-	
 }

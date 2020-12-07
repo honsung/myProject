@@ -30,4 +30,9 @@
 	<!-- 也可以放到spring配置里面以扫描包的方式进行 -->
 	<!-- <mappers> <mapper resource="org/mybatis/example/BlogMapper.xml" /> 
 		</mappers> -->
+		 <!-- 加载映射文件 -->
+    <mappers>
+        <!-- 通过 resource 方法一次加载一个映射文件 -->
+       <!-- <mapper resource="mapper/AuUserMapper.xml"/> -->
+    </mappers>
 </configuration>

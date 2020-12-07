@@ -102,7 +102,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.40</version>
+			<version>8.0.15</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core -->
 		<dependency>
@@ -230,5 +230,15 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<!-- <resources>
+			#编译后对xml进行资源拷贝
+			<resource>
+              <directory>src/main/java</directory>
+              <includes>
+                  <include>**/*.xml</include>
+              </includes>
+              <filtering>true</filtering>
+            </resource>
+        </resources> -->
 	</build>
 </project>

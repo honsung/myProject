@@ -1,9 +1,13 @@
 package com.honsung.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AuUser {
-    private String id;
+public class AuUser implements Serializable{
+    
+	private static final long serialVersionUID = 8494492489525507983L;
+
+	private String id;
 
     private String partyId;
 

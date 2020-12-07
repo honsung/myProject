@@ -4,7 +4,9 @@ import com.honsung.model.AuUser;
 import com.honsung.model.AuUserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.mybatis.spring.annotation.MapperScan;
 
+@MapperScan
 public interface AuUserMapper {
     int countByExample(AuUserExample example);
 

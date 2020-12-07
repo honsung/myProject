@@ -32,7 +32,11 @@ public class AuUserServiceImpl implements AuUserService{
 	}
 
 	public AuUser login(AuUser user) {
+		System.out.println(111111 +"user"+user.getLoginId());
 		logger.info(user.getLoginId()+"登录成功！");
+		logger.debug(user.getLoginId()+"登录成功！");
+		logger.warn(user.getLoginId()+"登录成功！");
+		logger.error(user.getLoginId()+"登录成功！");
 		return auUserMapper.login(user);
 	}
 
