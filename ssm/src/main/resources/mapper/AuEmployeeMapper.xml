@@ -93,7 +93,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from au_employee
+    from auth_employee
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -104,13 +104,13 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from au_employee
+    from auth_employee
     where ID = #{id,jdbcType=CHAR}
   </select>
   <select id="list" resultMap="BaseResultMap" parameterType="com.honsung.model.AuEmployeeExample">
 		select
 		<include refid="Base_Column_List" />
-		from au_employee
+		from auth_employee
 		<if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
@@ -119,17 +119,17 @@
         </if>
 	</select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from au_employee
+    delete from auth_employee
     where ID = #{id,jdbcType=CHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.honsung.model.AuEmployeeExample" >
-    delete from au_employee
+    delete from auth_employee
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.honsung.model.AuEmployee" >
-    insert into au_employee (ID, PERSON_NO, PERSON_NAME, 
+    insert into auth_employee (ID, PERSON_NO, PERSON_NAME, 
       ENGLISH_NAME, PERSON_TYPE, SEX, 
       MOBILE, TEL, EMAIL, 
       ADDRESS, POSTALCODE, REMARK, 
@@ -145,7 +145,7 @@
       #{column3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.honsung.model.AuEmployee" >
-    insert into au_employee
+    insert into auth_employee
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         ID,
@@ -266,13 +266,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.honsung.model.AuEmployeeExample" resultType="java.lang.Integer" >
-    select count(*) from au_employee
+    select count(*) from auth_employee
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update au_employee
+    update auth_employee
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=CHAR},
@@ -337,7 +337,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update au_employee
+    update auth_employee
     set ID = #{record.id,jdbcType=CHAR},
       PERSON_NO = #{record.personNo,jdbcType=VARCHAR},
       PERSON_NAME = #{record.personName,jdbcType=VARCHAR},
@@ -362,7 +362,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.honsung.model.AuEmployee" >
-    update au_employee
+    update auth_employee
     <set >
       <if test="personNo != null" >
         PERSON_NO = #{personNo,jdbcType=VARCHAR},
@@ -422,7 +422,7 @@
     where ID = #{id,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.honsung.model.AuEmployee" >
-    update au_employee
+    update auth_employee
     set PERSON_NO = #{personNo,jdbcType=VARCHAR},
       PERSON_NAME = #{personName,jdbcType=VARCHAR},
       ENGLISH_NAME = #{englishName,jdbcType=VARCHAR},

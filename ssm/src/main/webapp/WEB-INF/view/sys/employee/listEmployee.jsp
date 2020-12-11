@@ -57,9 +57,8 @@
 					</div>
 				</div>
 				<!-- 页面主内容区域 头部 结束-->
-             
 				<div class="row-fluid">
-					<div class="span6 responsive" data-tablet="span12 fix-offset" data-desktop="span6">
+					<div class="span12 responsive" data-tablet="span12 fix-offset" data-desktop="span12">
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
 						<div class="portlet box grey">
 							<div class="portlet-title">
@@ -89,10 +88,14 @@
 									<thead>
 										<tr>
 											<th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#listEmployee .checkboxes" /></th>
-											<th>登录账号</th>
-											<th class="hidden-480">姓名</th>
-											<th class="hidden-480">邮箱</th>
-											<th class="hidden-480">删除标志</th>
+											<th>姓名</th>
+											<th class="hidden-480">性别</th>
+											<th class="hidden-480">单位名称</th>
+											<th class="hidden-480">部门名称</th>
+											<th class="hidden-480">岗位名称</th>
+											<th class="hidden-480">移动电话</th>
+											<th class="hidden-480">状态</th>
+											<th class="hidden-480">创建时间</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -102,6 +105,11 @@
 											<td>${employee.personNo}</td>
 											<td class="hidden-480">${employee.personName}</td>
 											<td class="hidden-480"><a href="mailto:${employee.email}">${employee.email}</a></td>
+											<td class="hidden-480">${employee.personName}</td>
+                                            <td class="hidden-480">${employee.personName}</td>
+                                            <td class="hidden-480"><a href="mailto:${employee.email}">${employee.email}</a></td>
+                                            <td class="hidden-480"><a href="mailto:${employee.email}">${employee.email}</a></td>
+                                            <td class="hidden-480">${employee.personName}</td>
 											<td><span class="label label-success">${employee.enableStatus}</span></td>
 										</tr>
 									</c:forEach>
@@ -112,7 +120,6 @@
 						<!-- END EXAMPLE TABLE PORTLET-->
 					</div>
 				</div>
-              
    </div>
 </div>
 </div>

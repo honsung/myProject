@@ -322,8 +322,8 @@
 							<span class="arrow"></span>
 							</a>
 							<ul class="sub-menu">
-								<li><a href="#"><i class="icon-folder-open"></i>组织机构</a></li>
-								<li><a id="employeeList" href="<%=request.getContextPath()%>/employee/list?menu=employeeList"><i class="icon-user"></i>用户档案</a></li>
+								<li><a id="groupList" href="<%=request.getContextPath()%>/group/list?menu=groupList"><i class="icon-folder-open"></i>组织机构维护</a></li>
+								<li><a id="employeeList" href="<%=request.getContextPath()%>/employee/list?menu=employeeList"><i class="icon-user"></i>用户档案管理</a></li>
 							</ul>
 						</li>
 						<li>

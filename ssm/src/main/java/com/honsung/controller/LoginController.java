@@ -2,24 +2,23 @@ package com.honsung.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.honsung.model.AuUser;
-import com.honsung.model.Sys_User;
-import com.honsung.service.AuUserService;
-import com.honsung.service.Sys_UserService;
+import com.honsung.model.User;
+import com.honsung.service.UserService;
 
 @Controller
 public class LoginController {
 
-	/*@Autowired
-	private Sys_UserService sys_UserService;
-	*/
+	protected Logger log = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
-	private AuUserService auUserService;
+	private UserService userService;
 	
 	@RequestMapping("/tologin")
 	public String toLogin(){
@@ -38,17 +37,16 @@ public class LoginController {
 	}*/
 	
 	@RequestMapping(value="/loginGap", method=RequestMethod.POST)
-	public String Login(AuUser user,HttpSession session){
-		AuUser returnUser = auUserService.login(user);
-		System.out.println(returnUser.getName());
+	public String Login(User user,HttpSession session){
+		User returnUser = userService.login(user);
 		session.setAttribute("currentLoginUser", returnUser);
 		String returnPath = "index";
 		if(returnUser == null){
 			returnPath = "login/login";
 		}
+		System.out.println(returnUser.getName());
 		return returnPath;
 	}
-	
 	
 	@RequestMapping("/index")
 	public String index(HttpSession session){
