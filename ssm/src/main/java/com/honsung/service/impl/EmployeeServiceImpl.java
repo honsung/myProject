@@ -6,16 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.honsung.dao.AuEmployeeMapper;
+import com.honsung.dao.EmployeeMapper;
 import com.honsung.model.AuEmployee;
 import com.honsung.model.AuEmployeeExample;
+import com.honsung.model.Employee;
+import com.honsung.model.EmployeeExample;
 import com.honsung.service.EmployeeService;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
-	public AuEmployeeMapper auEmployeeMapper;
-	public List<AuEmployee> list(AuEmployeeExample example) {
-		return auEmployeeMapper.list(example);
+	public EmployeeMapper employeeMapper;
+	public List<Employee> list(EmployeeExample example) {
+		return employeeMapper.list(example);
 	}
 }

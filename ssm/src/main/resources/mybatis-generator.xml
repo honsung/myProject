@@ -57,7 +57,7 @@
 		<!-- <table tableName="employy" domainObjectName="Employy"></table>
 		<table tableName="dept" domainObjectName="Dept"></table> -->
 		<!-- <table tableName="sys_user" domainObjectName="Sys_User"></table> -->
-         <table tableName="auth_user" domainObjectName="User"></table> 
+         <table tableName="auth_employee" domainObjectName="Employee"></table> 
          <!-- <table tableName="au_employee" domainObjectName="AuEmployee"></table> -->
         <!--  <table tableName="au_company" domainObjectName="AuCompany"></table>
          <table tableName="au_department" domainObjectName="AuDepartment"></table>

@@ -62,7 +62,7 @@
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
 						<div class="portlet box grey">
 							<div class="portlet-title">
-								<div class="caption"><i class="icon-user"></i>用户信息</div>
+								<div class="caption"><i class="icon-user"></i>员工列表</div>
 								<div class="actions">
 									<a href="#" class="btn blue"><i class="icon-pencil"></i> 添加</a>
 									<div class="btn-group">
@@ -88,12 +88,15 @@
 									<thead>
 										<tr>
 											<th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#listEmployee .checkboxes" /></th>
+											<th>编码</th>
 											<th>姓名</th>
 											<th class="hidden-480">性别</th>
 											<th class="hidden-480">单位名称</th>
 											<th class="hidden-480">部门名称</th>
 											<th class="hidden-480">岗位名称</th>
+											<th class="hidden-480">办公电话</th>
 											<th class="hidden-480">移动电话</th>
+											<th class="hidden-480">邮箱</th>
 											<th class="hidden-480">状态</th>
 											<th class="hidden-480">创建时间</th>
 										</tr>
@@ -104,13 +107,39 @@
 											<td><input type="checkbox" class="checkboxes" value="${employee.id}" /></td>
 											<td>${employee.personNo}</td>
 											<td class="hidden-480">${employee.personName}</td>
-											<td class="hidden-480"><a href="mailto:${employee.email}">${employee.email}</a></td>
-											<td class="hidden-480">${employee.personName}</td>
-                                            <td class="hidden-480">${employee.personName}</td>
+											<td class="hidden-480">
+												<c:choose>
+												     <c:when test="${employee.sex eq '1'}">
+												          <span class="label label-success">男</span>
+												     </c:when>
+												     <c:when test="${employee.sex eq '0'}">
+												          <span class="label label-warning">女</span>
+												     </c:when>
+												     <c:otherwise>
+												          <span class="label label-default">保密</span>
+												     </c:otherwise>
+												</c:choose>
+											</td>
+											<td class="hidden-480">单位名称</td>
+											<td class="hidden-480">部门名称</td>
+                                            <td class="hidden-480">岗位名称</td>
+                                            <td class="hidden-480">${employee.mobile}</td>
+                                            <td class="hidden-480">${employee.tel}</td>
                                             <td class="hidden-480"><a href="mailto:${employee.email}">${employee.email}</a></td>
-                                            <td class="hidden-480"><a href="mailto:${employee.email}">${employee.email}</a></td>
-                                            <td class="hidden-480">${employee.personName}</td>
-											<td><span class="label label-success">${employee.enableStatus}</span></td>
+											<td>
+												<c:choose>
+												     <c:when test="${employee.enableStatus eq '1'}">
+												          <span class="label label-success">启用</span>
+												     </c:when>
+												     <c:otherwise>
+												          <span class="label label-success">禁用</span>
+												     </c:otherwise>
+												</c:choose>
+											<%-- <span class="label label-success">${employee.enableStatus=='1'?'男':'女' }</span> --%></td>
+											<td class="hidden-480">
+												<fmt:formatDate value="${employee.createDate}" var="createDate" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate>
+												${createDate}											
+											</td>
 										</tr>
 									</c:forEach>
 									</tbody>

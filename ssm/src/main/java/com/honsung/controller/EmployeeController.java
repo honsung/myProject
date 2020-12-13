@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
-import com.honsung.model.AuEmployee;
-import com.honsung.model.AuEmployeeExample;
+import com.honsung.model.Employee;
+import com.honsung.model.EmployeeExample;
 import com.honsung.service.EmployeeService;
 import com.github.pagehelper.PageInfo;
 
@@ -34,9 +34,9 @@ public class EmployeeController {
 	 * @return
 	 */
 	@RequestMapping(value="/list")
-	public String list(@RequestParam(value="pageNo",defaultValue="1")Integer pageNo,@RequestParam(value="pageSize",defaultValue="10")Integer pageSize,AuEmployeeExample example, Model model){
+	public String list(@RequestParam(value="pageNo",defaultValue="1")Integer pageNo,@RequestParam(value="pageSize",defaultValue="10")Integer pageSize,EmployeeExample example, Model model){
 		PageHelper.startPage(1, 10);
-		List<AuEmployee> list = employeeService.list(example);
+		List<Employee> list = employeeService.list(example);
 		PageInfo page = new PageInfo(list,10);
 		model.addAttribute("pageInfo", page);
 		return "sys/employee/listEmployee";
