@@ -18,17 +18,14 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper userMapper;
 	
-	@Override
 	public List<User> list() {
 		return userMapper.selectByExample(null);
 	}
 
-	@Override
 	public User get(String id) {
 		return userMapper.selectByPrimaryKey(id);
 	}
 
-	@Override
 	public User login(User user) {
 		log.info(user.toString());
 		log.info(user.getLoginId()+"登录成功！");
