@@ -5,10 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.honsung.dao.AuEmployeeMapper;
 import com.honsung.dao.EmployeeMapper;
-import com.honsung.model.AuEmployee;
-import com.honsung.model.AuEmployeeExample;
 import com.honsung.model.Employee;
 import com.honsung.model.EmployeeExample;
 import com.honsung.service.EmployeeService;
